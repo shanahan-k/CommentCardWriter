@@ -62,8 +62,15 @@ struct ContentView: View {
                 }
                 Section{
                     if commentReady {
-                        TextEditor(text:.constant("I am finding \(subject) \(classworkFeeling) in class \(connective) I am finding the EW \(EWFeeling)."))
+                        Text("I am finding \(subject) \(classworkFeeling) in class \(connective)  am finding the EW \(EWFeeling).")
+    
                         
+                    }
+                    
+                }
+                Section {
+                    if commentReady {
+                    Button("Create Comment", action:{}).foregroundColor(Color.red)
                     }
                 }
             }
