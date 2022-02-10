@@ -11,60 +11,65 @@ struct ContentView: View {
     @State private var subject : String = ""
     @State private var classworkFeeling : String =  ""
     @State private var EWFeeling : String = ""
-    var body: some View {
-        VStack {
-            Form{
-                TextField("What subject?", text: $subject)
-
-            }
-            Form {
-                Text("How are you Feeling (Classwork)?")
-                HStack {
-                    Button("😃") {
-                        classworkFeeling = "Good"
-                    }
-                    Spacer()
-                    Button("🙂") {
-                        classworkFeeling = "OK"
-                    }
-                    Spacer()
-                    Button("🙁") {
-                        classworkFeeling = "not so good"
-                    }
-                
-                }
-            }
-            Spacer()
-            Form {
-                Text("How are you Feeling (EW)?")
-                HStack {
-                    Button("😃") {
-                        EWFeeling = "Good"
-                    }
-                    Spacer()
-                    Button("🙂") {
-                        EWFeeling = "OK"
-                    }
-                    Spacer()
-                    Button("🙁") {
-                        EWFeeling = "Bad"
-                    }
-                
-                }
-                
-                
-                
-            }
-            Spacer()
-            Form {
-            Text("I am finding \(subject) \(classworkFeeling) in class and I am finding the EW \(EWFeeling).")
-            }
-            Spacer()
-
-            
+    internal var commentReady : Bool {
+        if subject != "" && classworkFeeling != "" && EWFeeling != ""
+        {
+            return true
+        } else {
+            return false
         }
     }
-}
+    internal var connective: String {
+        if EWFeeling == "bad" && classworkFeeling == "good" || EWFeeling == "good" && classworkFeeling == "bad" {
+            return "but"
+        } else {
+            return "and"
+        }
+    }
+    
+    var body: some View {
+        
+            
+            Form{
+                TextField("What subject?", text: $subject)
+                Section {
+                    List {
+                        Text("How are you Feeling (Classwork)?")
+                        
+                        Button("😃 - Good",action:{classworkFeeling = "good"} )
+                                
+                            
+                
+                        Button("🙂 - OK",action:{classworkFeeling = "OK"})
+                                
+                        Button("🙁 - Bad",action: {classworkFeeling = "bad"})
+                                
+                            
+                        
+                    }
+                }
+                Section {
+                    List {
+                    Text("How are you Feeling (EW)?")
+                    
+                    Button("😃 - Good",action: {EWFeeling = "good"})
+
+                    Button("🙂 - Ok",action: {EWFeeling = "OK"})
+            
+                    Button("🙁 - bad",action: {EWFeeling = "bad"})
+
+                        }
+                }
+                Section{
+                    if commentReady {
+                        TextEditor(text:.constant("I am finding \(subject) \(classworkFeeling) in class \(connective) I am finding the EW \(EWFeeling)."))
+                        
+                    }
+                }
+            }
+        }
+    }
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
