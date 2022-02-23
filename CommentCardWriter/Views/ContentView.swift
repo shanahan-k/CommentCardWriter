@@ -70,7 +70,9 @@ struct ContentView: View {
                 }
                 Section {
                     if commentReady {
-                    Button("Create Comment", action:{}).foregroundColor(Color.red)
+                        NavigationLink(destination: ExportView()) {
+                            Text("create comment").foregroundColor(.red)
+                        }
                     }
                 }
             }

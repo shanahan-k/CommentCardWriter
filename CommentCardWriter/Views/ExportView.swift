@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ExportView: View {
     var body: some View {
-        Text("Hello world")
+        Text("This is a placeholder until I get navigation link to work :/")
+        //TextField("I am finding \(subject) \(classworkFeeling) in class \(connective)  am finding the EW \(EWFeeling).")
     }
 }
 
